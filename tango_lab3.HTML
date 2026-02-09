@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DIARY</title>
+
+<style>
+body{
+    background-image:url(https://img.freepik.com/premium-photo/wrinkled-diary-paper-texture-oldfashioned-paper-texture-paper-vintage-background_1295756-8442.jpg?w=2000);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    font-family: Arial, sans-serif;
+}
+
+.container{
+    border:2px solid black;
+    width:350px;
+    padding:20px;
+    background-color:#ffb6c1;
+    border-radius:12px;
+    box-shadow:0 5px 10px rgba(0,0,0,0.3);
+    text-align:center;
+}
+
+.font{
+    font-family: "Freestyle Script", cursive;
+    font-size:36px;
+}
+input, textarea{
+    width:90%;
+    padding:5px;
+    margin:5px 0;
+}
+</style>
+</head>
+
+<body>
+
+<form class="container">
+    <h1 class="font">Diary Entry</h1>
+
+    <label>First name:</label><br>
+    <input type="text" name="fname"><br>
+
+    <label>Last name:</label><br>
+    <input type="text" name="lname"><br><br>
+
+    <label><b>Date</b></label><br>
+    <input type="date"><br><br>
+
+    <label><b>Time:</b></label>
+    <input type="radio" name="Time" value="AM"> am
+    <input type="radio" name="Time" value="PM"> pm
+
+    <label><b>Mood:</b></label><br>
+    <input type="checkbox"> <span style="color:yellow">HAPPY</span><br>
+    <input type="checkbox"> <span style="color:red">ANGRY</span><br>
+    <input type="checkbox"> <span style="color:blue">SAD</span><br>
+    <input type="checkbox"> <span style="color:purple">EXCITED</span><br>
+    <input type="checkbox"> <span style="color:#ff1493">INLOVE</span><br>
+    <input type="checkbox"> <span style="color:maroon">EXHAUSTED</span><br><br>
+
+    <hr>
+
+    <label><b>Entry</b></label><br>
+    <textarea rows="5"></textarea>
+
+    <hr><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
