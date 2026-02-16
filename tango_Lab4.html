@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #2a6ebb;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+h1, h4{
+    text-align: center;
+    margin: 5px;
+}
+
+.board{
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+    background-color: #0c4b;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.cell{
+    background-color: #fff;
+    border: 1px solid #f63440;
+    border-radius: 10px;
+    transition: transform 0.2s, background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.cell:hover{
+    background-color: #f63440;
+    transform: translateY(-2px);
+}
+
+.button{
+    margin-top: 50px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+
+.container{
+    border: 2px solid black;
+    width: 350px;
+    padding: 20px;
+    background-color: #ffb6c1;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>TIC TAC TOE</h1><br>
+    <h4>Current player: X</h4><br>
+
+    <div class="board">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+    </div>
+
+   
+</div>
+ <button class="button">Restart</button>
+</body>
+</html>
