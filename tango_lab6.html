@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    font-family: "Courier New";
+}
+
+table, th, td {
+    border:1px solid black;
+    width:610px;
+
+    background-color:lightgray;
+    align-items:center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Inventory System</h1>
+	
+    <input type="text" id="name" placeholder="Item Name">
+    <input type="number" id="price" placeholder="Price">
+    <input type="number" id="stock" placeholder="Stock">
+    <button onclick="addItem()">Add Item</button><br><br>
+
+    <table id="inventoryTable">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+	<tr>
+	    <td> egg</td>
+ 		<td> 12</td>
+		 <td> 5</td>
+</tr>
+<tr>
+	    <td> banana</td>
+ 		<td> 20</td>
+		 <td> 8</td>
+</tr>
+ <td> tomatoe</td>
+ 		<td> 25</td>
+		 <td> 10</td>
+</tr>
+<td> iphone 15 pro max</td>
+ 		<td> 45000</td>
+		 <td> 15</td>
+</tr>
+<td> titan get</td>
+ 		<td> 100</td>
+		 <td> out of stock</td>
+</tr>
+
+    </table>
+</div>
+
+<script>
+function addItem() {
+const name = document.getElementById("name").value;
+const price = document.getElementById("price").value;
+const stock = document.getElementById("stock").value;
+
+const table = document.getElementById("inventoryTable");
+const row = table.insertRow();
+
+const cell1 = document.createElement("td");
+const cell2 = document.createElement("td");
+const cell3 = document.createElement("td");
+
+cell1.append(name);
+cell2.append(price);
+
+if(stock == 0){
+cell3.append("out of stock");
+cell3.style.color = "red";
+}else{
+cell3.append(stock);
+}
+
+row.appendChild(cell1);
+row.appendChild(cell2);
+row.appendChild(cell3);
+
+document.getElementById("name").value = "";
+document.getElementById("price").value = "";
+document.getElementById("stock").value = "";
+}
+</script>
+</body>
+</html>
