@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    font-family: "Courier New";
+}
+
+table, th, td {
+    border:1px solid black;
+    width:610px;
+    background-color:lightgray;
+    text-align:center;
+}
+
+table {
+    border-collapse: collapse;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Inventory System</h1>
+	
+    <input type="text" id="name" placeholder="Item Name">
+    <input type="number" id="price" placeholder="Price">
+    <input type="number" id="stock" placeholder="Stock">
+    <button onclick="inventory.addItem()">Add Item</button>
+    <br><br>
+
+    <input type="text" id="buyName" placeholder="Product Name">
+    <input type="number" id="buyQty" placeholder="Quantity">
+    <button onclick="inventory.buyProduct()">buyProduct</button>
+    <br><br>
+
+    <table id="inventoryTable">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+    </table>
+
+</div>
+
+<script>
+
+class Item{
+constructor(name,price,stock){
+this.name=name
+this.price=price
+this.stock=stock
+}
+}
+
+class inventorySystem{
+
+constructor(){
+
+this.inventory=[
+
+new Item("egg",12,5),
+new Item("banana",20,8),
+new Item("tomato",25,10),
+new Item("iphone 15 pro max",45000,15),
+new Item("titan gel",100,0)
+
+]
+
+this.renderInventory()
+
+}
+
+addItem(){
+
+const name=document.getElementById("name").value
+const price=parseInt(document.getElementById("price").value)
+const stock=parseInt(document.getElementById("stock").value)
+
+if(!name || name == " "|| price<=0 || stock<0){
+alert("Enter valid product details!")
+return
+}
+
+const existing=this.inventory.find(
+p=>p.name.toLowerCase()===name.toLowerCase()
+)
+
+if(existing){
+existing.stock+=stock
+existing.price=price
+}
+else{
+this.inventory.push(new Item(name,price,stock))
+}
+
+this.renderInventory()
+
+document.getElementById("name").value=""
+document.getElementById("price").value=""
+document.getElementById("stock").value=""
+
+}
+
+buyProduct(){
+
+const name=document.getElementById("buyName").value
+const qty=parseInt(document.getElementById("buyQty").value)
+
+const product=this.inventory.find(
+p=>p.name.toLowerCase()===name.toLowerCase()
+)
+
+if(!product){
+alert("Product not found")
+return
+}
+
+if(qty>product.stock){
+alert("Not enough stock")
+return
+}
+
+product.stock-=qty
+
+this.renderInventory()
+
+}
+
+renderInventory(){
+
+const table=document.getElementById("inventoryTable")
+
+table.innerHTML=`
+<tr>
+<th>Name</th>
+<th>Price</th>
+<th>Stock</th>
+</tr>
+`
+
+this.inventory.forEach(item=>{
+
+const row=document.createElement("tr")
+
+const cell1=document.createElement("td")
+const cell2=document.createElement("td")
+const cell3=document.createElement("td")
+
+cell1.textContent=item.name
+cell2.textContent=item.price
+
+if(item.stock==0){
+cell3.textContent="out of stock"
+cell3.style.color="red"
+}
+else{
+cell3.textContent=item.stock
+}
+
+row.appendChild(cell1)
+row.appendChild(cell2)
+row.appendChild(cell3)
+
+table.appendChild(row)
+
+})
+
+}
+
+}
+
+const inventory=new inventorySystem()
+
+</script>
+
+</body>
+</html>
