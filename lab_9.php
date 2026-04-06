@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🍕 Pizza Ordering System - Student Template</title>
     <style>
-        /* CSS styles preserved from original design */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #FF6B6B 0%, #FFA500 50%, #FFD700 100%); min-height: 100vh; padding: 40px 20px; }
         .container { max-width: 1200px; margin: 0 auto; }
@@ -23,104 +22,157 @@
         .total { font-weight: bold; color: white; font-size: 1.5em; background: linear-gradient(135deg, #FF6B6B, #FFA500); padding: 20px; border-radius: 10px; text-align: center; }
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
         .menu-item { background: #FFF5E6; padding: 15px; border-radius: 12px; border: 2px solid #FFA500; text-align: center; }
-        .order-counter { background: linear-gradient(135deg, #FF6B6B, #FFA500); color: white; }
+        .order-counter { background: linear-gradient(135deg, #FF6B6B, #FFA500); color: white; padding: 15px; border-radius: 10px; }
         .order-item { background: rgba(255,255,255,0.2); padding: 10px; border-radius: 8px; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
-    <?php
-        // Pre-defined Associative Arrays for the Menu
-        $pizzaMenu = [
-            "Cheese" => 150,
-            "Margherita" => 160,
-            "Veggie" => 170,
-            "Pepperoni" => 180,
-            "Four Cheese" => 190,
-            "Hawaiian" => 200,
-            "BBQ Chicken" => 220,
-            "Meat Lovers" => 250
-        ];
+<?php
+// Menu arrays
+$pizzaMenu = [
+    "Cheese" => 150,
+    "Margherita" => 160,
+    "Veggie" => 170,
+    "Pepperoni" => 180,
+    "Four Cheese" => 190,
+    "Hawaiian" => 200,
+    "BBQ Chicken" => 220,
+    "Meat Lovers" => 250
+];
 
-        $toppingsMenu = [
-            "Onions" => 15,
-            "Green Peppers" => 15,
-            "Mushroom" => 20,
-            "Jalapenos" => 20,
-            "Olives" => 25,
-            "Pineapple" => 25,
-            "Extra Cheese" => 30,
-            "Sausage" => 35,
-            "Bacon" => 40
-        ];
-        
-        // TODO: 1. Define your computePizzaTotal Function here
-    ?>
+$toppingsMenu = [
+    "Onions" => 15,
+    "Green Peppers" => 15,
+    "Mushroom" => 20,
+    "Jalapenos" => 20,
+    "Olives" => 25,
+    "Pineapple" => 25,
+    "Extra Cheese" => 30,
+    "Sausage" => 35,
+    "Bacon" => 40
+];
 
-    <div class="container">
-        <header>
-            <h1><span>🍕</span> Pizza Bites Express</h1>
-            <p>Laboratory Exercise: PHP Control Structures & Functions</p>
-        </header>
+// Function to compute total
+function computePizzaTotal($pizza, $toppings, $quantity) {
+    global $pizzaMenu, $toppingsMenu;
 
-        <div class="content">
-            <div class="card">
-                <h2>🍴 Order Now</h2>
-                <form method="post">
-                    <div class="form-group">
-                        <label>Customer Name</label>
-                        <input type="text" name="customer" required>
-                    </div>
+    if (is_array($pizza)) {
+        $pizza = reset($pizza);
+    }
 
-                    <div class="form-group">
-                        <label>Select Your Pizza</label>
-                        <div class="radio-group">
-                            </div>
-                    </div>
+    $basePrice = isset($pizzaMenu[$pizza]) ? $pizzaMenu[$pizza] : 0;
 
-                    <div class="form-group">
-                        <label>Add Toppings</label>
-                        <div class="checkbox-group">
-                            </div>
-                    </div>
+    $toppingsPrice = 0;
+    if (!empty($toppings)) {
+        foreach ($toppings as $topping) {
+            if (isset($toppingsMenu[$topping])) {
+                $toppingsPrice += $toppingsMenu[$topping];
+            }
+        }
+    }
 
-                    <div class="form-group">
-                        <label>Quantity</label>
-                        <input type="number" name="qty" min="1" value="1">
-                    </div>
+    return ($basePrice + $toppingsPrice) * $quantity;
+}
+?>
 
-                    <button type="submit" name="order">🚀 Place Order</button>
-                </form>
-            </div>
+<div class="container">
+    <header>
+        <h1><span>🍕</span> Pizza Bites Express</h1>
+        <p>Laboratory Exercise: PHP Control Structures & Functions</p>
+    </header>
 
-            <div class="card">
-                <h2>📋 Order Summary</h2>
-                <?php
-                    if (isset($_POST['order'])) {
-                        // TODO: 4. Capture Form Data
-                        // TODO: 5. Call function and calculate Grand Total
-                        // TODO: 6. Display Results
-                    } else {
-                        echo "<p style='text-align: center; color: #999;'>Place an order to see summary</p>";
+    <div class="content">
+
+        <div class="card">
+            <h2>🍴 Order Now</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label>Customer Name</label>
+                    <input type="text" name="customer" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Your Pizza</label>
+                    <?php
+                    foreach ($pizzaMenu as $name => $price) {
+                        echo "<label>
+                                <input type='radio' name='Pizza' value='$name' required>
+                                <span>$name</span>
+                                <span class='price'>₱$price</span>
+                              </label><br>";
                     }
-                ?>
-            </div>
+                    ?>
+                </div>
 
-            <div class="card full-width">
-                <h2>📚 Menu Price List</h2>
-                <div class="menu-grid">
-                    </div>
-            </div>
-
-            <div class="card full-width order-counter">
-                <h2>🎯 Order Counter</h2>
-                <?php
-                    if (isset($_POST['order'])) {
-                        // TODO: 8. Use a FOR loop to display the order line based on Quantity
+                <div class="form-group">
+                    <label>Add Toppings</label>
+                    <?php
+                    foreach($toppingsMenu as $name => $price){
+                        echo "<label>
+                                <input type='checkbox' name='toppings[]' value='$name'>
+                                $name
+                                <span class='price'>₱$price</span>
+                              </label><br>";
                     }
+                    ?>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" name="qty" min="1" value="1">
+                </div>
+
+                <button type="submit" name="order">🚀 Place Order</button>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="card">
+            <h2>📋 Order Summary</h2>
+            <?php
+            if (isset($_POST['order'])) {
+                $customer = $_POST['customer'];
+                $pizza = $_POST['Pizza'];
+                $toppings = $_POST['toppings'] ?? [];
+                $qty = intval($_POST['qty']);
+
+                $total = computePizzaTotal($pizza, $toppings, $qty);
+
+                echo "<div class='summary-item'><span>Name:</span><span>$customer</span></div>";
+                echo "<div class='summary-item'><span>Pizza:</span><span>$pizza</span></div>";
+                echo "<div class='summary-item'><span>Quantity:</span><span>$qty</span></div>";
+                echo "<div class='summary-item'><span>Toppings:</span><span>";
+                echo empty($toppings) ? "None" : implode(", ", $toppings);
+                echo "</span></div>";
+                echo "<div class='total'>Total: ₱$total</div>";
+            } else {
+                echo "<p style='text-align: center; color: #999;'>Place an order to see summary</p>";
+            }
+            ?>
+        </div>
+
+        <div class="card full-width">
+            <h2>📚 Menu Price List</h2>
+		<div> Pizza</div>
+            <div class="menu-grid">
+                <?php
+                foreach ($pizzaMenu as $name => $price) {
+                    echo "<div class='menu-item'>$name<br>₱$price</div>";
+                }
+		foreach ($toppingsMenu as $name => $price) {
+                    echo "<div class='menu-item'>$name<br>₱$price</div>";
+                }
                 ?>
             </div>
         </div>
+
+           <div class="card full-width order-counter">
+            <h2>🎯 Order Counter</h2>
+            <?php
+             ?>
+        </div>
     </div>
+</div>
 </body>
 </html>
