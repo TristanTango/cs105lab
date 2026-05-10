@@ -139,6 +139,10 @@ body {
   margin-top: auto;
   transform: translateY(-25%);
 }
+#p {
+  font-size: 18px;
+  color: #333;
+}
 
 .blueButton {
   width: 80px;
@@ -228,8 +232,10 @@ body {
 }
 
 .infoScreen {
+  display: flex;
+  flex-direction: column;
   width: 85%;
-  height: 160px;
+  height: 220px;
   background: #36ca1c;
   border-radius: 20px;
   display: flex;
@@ -301,4 +307,9 @@ body {
   height: 100px;
   background: yellow;
   border-radius: 15px;
+}
+.pokemonImage {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
 }
