@@ -1,74 +1,143 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>DIARY</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diary Entry</title>
 
 <style>
+
 body{
-    background-image:url(https://img.freepik.com/premium-photo/wrinkled-diary-paper-texture-oldfashioned-paper-texture-paper-vintage-background_1295756-8442.jpg?w=2000);
+    margin:0;
+    padding:0;
+    background-image:url('https://img.freepik.com/premium-photo/wrinkled-diary-paper-texture-oldfashioned-paper-texture-paper-vintage-background_1295756-8442.jpg?w=2000');
+    background-size:cover;
+    background-position:center;
+
     display:flex;
     justify-content:center;
     align-items:center;
     min-height:100vh;
+
     font-family: Arial, sans-serif;
 }
 
 .container{
-    border:2px solid black;
     width:350px;
     padding:20px;
-    background-color:#ffb6c1;
+
+    border:2px solid black;
     border-radius:12px;
+
+    background-color:#ffb6c1;
+
     box-shadow:0 5px 10px rgba(0,0,0,0.3);
-    text-align:center;
 }
 
 .font{
-    font-family: "Freestyle Script", cursive;
-    font-size:36px;
+    font-family:"Freestyle Script", cursive;
+    font-size:40px;
+    text-align:center;
+    margin-bottom:20px;
 }
-input, textarea{
-    width:90%;
-    padding:5px;
-    margin:5px 0;
+
+label{
+    font-weight:bold;
 }
+
+input[type="text"],
+input[type="date"],
+textarea{
+    width:100%;
+    padding:8px;
+    margin-top:5px;
+    margin-bottom:10px;
+
+    border:1px solid #ccc;
+    border-radius:5px;
+
+    box-sizing:border-box;
+}
+textarea{
+    resize:none;
+}
+
+.mood{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.submit-btn{
+    width:100%;
+    padding:10px;
+
+    border:none;
+    border-radius:5px;
+
+    background-color:#ff1493;
+    color:white;
+
+    font-size:16px;
+    cursor:pointer;
+}
+
+.submit-btn:hover{
+    background-color:#e60073;
+}
+
 </style>
 </head>
 
 <body>
 
-<form class="container">
+<form class="container" action="#" method="POST">
+
     <h1 class="font">Diary Entry</h1>
 
-    <label>First name:</label><br>
-    <input type="text" name="fname"><br>
+    <label>First Name:</label>
+    <input type="text" name="fname" required>
 
-    <label>Last name:</label><br>
-    <input type="text" name="lname"><br><br>
+    <label>Last Name:</label>
+    <input type="text" name="lname" required>
 
-    <label><b>Date</b></label><br>
-    <input type="date"><br><br>
+    <label>Date:</label>
+    <input type="date" name="date" required>
 
-    <label><b>Time:</b></label>
-    <input type="radio" name="Time" value="AM"> am
-    <input type="radio" name="Time" value="PM"> pm
+    <label>Time:</label><br>
+    <input type="radio" name="time" value="AM" required> AM
+    <input type="radio" name="time" value="PM"> PM
 
-    <label><b>Mood:</b></label><br>
-    <input type="checkbox"> <span style="color:yellow">HAPPY</span><br>
-    <input type="checkbox"> <span style="color:red">ANGRY</span><br>
-    <input type="checkbox"> <span style="color:blue">SAD</span><br>
-    <input type="checkbox"> <span style="color:purple">EXCITED</span><br>
-    <input type="checkbox"> <span style="color:#ff1493">INLOVE</span><br>
-    <input type="checkbox"> <span style="color:maroon">EXHAUSTED</span><br><br>
+    <div class="mood">
+        <label>Mood:</label><br>
+
+        <input type="checkbox" name="mood[]" value="Happy">
+        <span style="color:gold;">HAPPY</span><br>
+
+        <input type="checkbox" name="mood[]" value="Angry">
+        <span style="color:red;">ANGRY</span><br>
+
+        <input type="checkbox" name="mood[]" value="Sad">
+        <span style="color:blue;">SAD</span><br>
+
+        <input type="checkbox" name="mood[]" value="Excited">
+        <span style="color:purple;">EXCITED</span><br>
+
+        <input type="checkbox" name="mood[]" value="Inlove">
+        <span style="color:#ff1493;">INLOVE</span><br>
+
+        <input type="checkbox" name="mood[]" value="Exhausted">
+        <span style="color:maroon;">EXHAUSTED</span>
+    </div>
 
     <hr>
 
-    <label><b>Entry</b></label><br>
-    <textarea rows="5"></textarea>
+    <label>Entry:</label>
+    <textarea rows="5" name="entry" required></textarea>
 
-    <hr><br>
+    <hr>
 
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" class="submit-btn">
+
 </form>
 
 </body>
